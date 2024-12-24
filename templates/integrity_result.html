@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockendance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff; /* White background */
+            color: #000000; /* Black text color */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        h5 {
+            font-size: 24px;
+            color: #000000; /* Black color for the message */
+            margin-bottom: 30px;
+            animation: fadeIn 1s ease; /* Animation for the message */
+        }
+        .result-container {
+            background-color: #9eff92; /* Green background for the container */
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            max-width: 600px;
+            width: 100%;
+            text-align: left;
+        }
+        .btn {
+            background-color: #0000ff; /* Blue button background */
+            color: #ffffff; /* White text on the button */
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s; /* Button transition */
+        }
+        .btn:hover {
+            background-color: #000080; /* Darker blue on hover */
+            transform: scale(1.05); /* Button hover scale effect */
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h5>Blockchain Integrity Check Results</h5>
+
+    <div class="result-container">
+        {% for line in result %}
+            <p>{{ line }}</p> <!-- Display each line of the result -->
+        {% endfor %}
+    </div>
+
+    <button class="btn" type="button" id="button" name="button">Go Back</button>
+    <script type="text/javascript">
+        function goBack() {
+            window.open("/", "_self");
+        }
+        var button = document.getElementById("button");
+        button.addEventListener("click", goBack);
+    </script>
+</body>
+</html>

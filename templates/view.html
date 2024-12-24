@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockendance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff; /* Background is white */
+            color: #000000; /* Text color is black */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        h3 {
+            text-align: center;
+            color: #000000; /* Changed color to black */
+            margin-bottom: 20px;
+            animation: slideIn 0.5s ease; /* Animation for heading */
+        }
+        h6 {
+            color: #000000; /* Changed color to black */
+            margin: 10px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 80%; /* Set width of the table */
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow to the table */
+            border-radius: 8px; /* Rounded corners */
+            overflow: hidden; /* Round corners for table */
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #000000; /* Border color changed to black */
+        }
+        th {
+            background-color: #0000ff; /* Header background color changed to blue */
+            color: #ffffff; /* Header text color kept as white */
+        }
+        tr:hover {
+            background-color: rgba(0, 0, 255, 0.1); /* Highlight row on hover with light blue */
+        }
+        .btn {
+            background-color: #0000ff; /* Button background changed to blue */
+            color: #ffffff; /* Button text color kept as white */
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s; /* Button transition */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            margin: 20px 0;
+        }
+        .btn:hover {
+            background-color: #000080; /* Darker blue on hover */
+            transform: scale(1.05); /* Button hover scale effect */
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h3>Hello {{ name }}, here is the attendance data</h3>
+    <h6>Date: &emsp; {{ date }}</h6>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Roll number</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(1, number + 1) %}
+            <tr>
+                <td>{{ class }} Rollno.-{{ "%02d" % i }}</td>
+                <td>{{ status[i - 1] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <button class="btn" type="button" id="button" name="button">Go Back</button>
+    <script type="text/javascript">
+        function goBack() {
+            window.open("/", "_self");
+        }
+        var button = document.getElementById("button");
+        button.addEventListener("click", goBack);
+    </script>
+</body>
+</html>

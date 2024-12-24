@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockendance</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff; /* Background color set to white */
+            color: #000000; /* Text color set to black */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #9eff92; /* Container background set to green */
+            border-radius: 40px;
+            padding: 50px; /* Padding for the container */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 800px; /* Maximum width for container */
+            width: 90%;
+            animation: fadeIn 1s ease; /* Animation for container */
+        }
+        h1 {
+            text-align: center;
+            color: #000000; /* Text color set to black */
+            margin-bottom: 30px;
+            animation: slideIn 1s ease; /* Animation for heading */
+        }
+        p {
+            margin: 20px 0;
+            font-size: 18px; /* Increased font size */
+            color: #000000; /* Text color set to black */
+        }
+        .btn {
+            background-color: #13054d;; /* Button background set to blue */
+            color: #ffffff; /* Button text color set to white */
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s; /* Button transition */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            width: 100%;
+        }
+        .btn:hover {
+            background-color: #000080; /* Darker blue on hover */
+            transform: scale(1.05); /* Button hover scale effect */
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        label {
+            color: #000000; /* Label text color set to black */
+            font-size: 18px; /* Font size for labels */
+            display: inline; /* Inline for better alignment */
+            margin-right: 10px; /* Space between label and input */
+        }
+        .radio-group {
+            display: inline-block; /* Keep radio buttons in line */
+            margin-right: 15px; /* Space between radio groups */
+        }
+        input[type="radio"] {
+            margin-right: 5px; /* Space between radio and label */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Blockendance</h1>
+
+        <form action="/" method="post">
+            {% if name %}
+            <h2>Hello {{ name }}, enter attendance status</h2>
+            {% endif %}
+            
+            {% for i in range(1, number + 1) %}
+            <p>
+                {{ class }}Roll no.-{{ "%02d" % i }}: &emsp; <!-- Displaying selected class and incrementing roll number -->
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="roll_no{{ i }}" value="P">
+                        Present
+                    </label>
+                    <label>
+                        <input type="radio" name="roll_no{{ i }}" value="A" checked="checked">
+                        Absent
+                    </label>
+                </div>
+            </p>
+            {% endfor %}
+            <br />
+            <button class="btn" type="submit" name="action">Submit
+                <i class="material-icons right">send</i>
+            </button>
+        </form>
+    </div>
+</body>
+</html>

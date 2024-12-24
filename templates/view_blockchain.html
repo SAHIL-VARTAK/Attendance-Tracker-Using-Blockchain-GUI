@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain View</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff; /* Changed background to white */
+            color: #000000; /* Changed font color to black */
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+            max-width: 1000px;
+            margin: auto;
+            background-color: #ffffff; /* Changed background color to white */
+            border-radius: 10px;
+            overflow-x: auto; /* Allow horizontal scrolling */
+        }
+        h1 {
+            text-align: center;
+            color: #13054d; /* Changed color to dark purple */
+        }
+        .block-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .block {
+            padding: 20px;
+            margin: 10px;
+            background-color: #89fd6a; /* Light grey background for blocks */
+            border-radius: 8px;
+            width: 300px; /* Fixed uniform width */
+            position: relative;
+            flex-shrink: 0; /* Prevent blocks from shrinking */
+            word-wrap: break-word; /* Wrap long text to the next line */
+            box-sizing: border-box;
+        }
+        .block h2 {
+            color: #13054d; /* Changed color to dark purple */
+            font-size: 18px;
+        }
+        .block p {
+            color: #000000; /* Changed font color to black */
+            font-size: 14px;
+            overflow: hidden;
+            text-overflow: ellipsis; /* Truncate long text */
+            white-space: nowrap; /* Keep text on a single line */
+            max-width: 100%; /* Ensure text doesn't overflow block */
+        }
+        .block p:hover {
+            overflow: visible;
+            white-space: normal; /* Show full text on hover */
+            background-color: #13054d; /* Changed hover background to dark purple */
+            padding: 5px;
+            color: #ffffff; /* White text on hover */
+        }
+        .block .data-section {
+            color: #000000; /* Changed font color to black */
+            font-size: 14px;
+            max-height: 15px; /* Set a fixed height for the collapsed state */
+            overflow: hidden; /* Hide overflow when not hovered */
+            transition: max-height 0.3s ease, background-color 0.3s; /* Smooth transition */
+        }
+        .block .data-section:hover {
+            max-height: 200px; /* Set a larger height when hovered */
+            background-color: #13054d; /* Changed hover background to dark purple */
+            padding: 5px;
+            overflow: visible; /* Show the content when hovered */
+            color: #ffffff; /* White text on hover */
+        }
+        .arrow {
+            width: 40px;
+            height: 2px;
+            background-color: #000000; /* Changed arrow color to black */
+            margin: 0 10px;
+            position: relative;
+        }
+        .arrow::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            border-left: 10px solid #000000; /* Changed arrow color to black */
+            position: absolute;
+            right: -10px;
+            top: -4px;
+        }
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #13054d; /* Changed background color to dark purple */
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 20px;
+            cursor: pointer;
+            text-align: center;
+            width: 100px;
+            align: center;
+        }
+        .back-btn:hover {
+            background-color: #13054d; /* Kept hover background color dark purple */
+            color: #ffffff; /* White text on hover */
+        }
+    </style>
+</head>
+<body>
+    <h1>Blockchain Data</h1>
+    <div class="container">
+        <div class="block-container">
+            {% for block in blockchain %}
+            <div class="block">
+                <h2 style="text-align: center;">Block {{ block.index }}</h2>
+                <p><strong>Timestamp:</strong> {{ block.timestamp }}</p>
+<!--                <p><strong>Data:</strong> {{ block.data }}</p>-->
+                <div class="data-section">
+                    {% if block.index == 0 %}
+                        <strong>Data:</strong> {{ block.data }}
+                    {% else %}
+                        <strong>Data:</strong>
+                        <ul>
+                            <li><strong>Name:</strong> {{ block.data[0] }}</li>
+                            <li><strong>Date:</strong> {{ block.data[1] }}</li>
+                            <li><strong>Course:</strong> {{ block.data[2] }}</li>
+                            <li><strong>Class:</strong> {{ block.data[3] }}</li>
+                            <li><strong>Attendance:</strong> {{ block.data[4] }}</li>
+                        </ul>
+                    {% endif %}
+                </div>
+                <p><strong>Previous Hash:</strong> {{ block.prev_hash }}</p>
+                <p><strong>Hash:</strong> {{ block.hash }}</p>
+            </div>
+            {% if not loop.last %}
+            <div class="arrow"></div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <!-- Back button
+    <a href="/" class="back-btn">Back</a> -->
+    <div style="text-align: center;">
+        <a href="/" class="back-btn">Back</a>
+    </div>
+</body>
+</html>
